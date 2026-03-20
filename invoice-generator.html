@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌐 外贸客户开发技能箱 · 出海引擎</title>
+    <!-- 字体 & 图标库 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f0f5fe 0%, #e9f0fa 100%);
+            min-height: 100vh;
+            padding: 2rem 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .toolbox {
+            max-width: 1400px;
+            width: 100%;
+            background: rgba(255,255,255,0.3);
+            backdrop-filter: blur(4px);
+            border-radius: 3rem;
+            padding: 2rem 2rem 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0,20,60,0.25);
+            border: 1px solid rgba(255,255,255,0.6);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #1a2a4f, #2c3e6e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header h1 i {
+            background: #ffffffcc;
+            padding: 0.6rem;
+            border-radius: 2rem;
+            color: #1e3c72;
+            box-shadow: 0 8px 16px -8px #1e3c7230;
+            font-size: 1.8rem;
+        }
+
+        .one-click-btn {
+            background: #1e2f4f;
+            color: white;
+            border: none;
+            padding: 0.9rem 2rem;
+            border-radius: 60px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            cursor: pointer;
+            box-shadow: 0 10px 20px -5px #1e2f4f70;
+            transition: all 0.2s ease;
+            border: 1px solid #ffffff30;
+            letter-spacing: 0.3px;
+        }
+
+        .one-click-btn:hover {
+            background: #143157;
+            transform: translateY(-3px);
+            box-shadow: 0 18px 25px -8px #0a1a33;
+        }
+
+        .one-click-btn i {
+            font-size: 1.2rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            padding: 1.8rem 1.5rem;
+            box-shadow: 0 15px 35px -15px rgba(20,40,70,0.15);
+            border: 1px solid rgba(255,255,255,0.7);
+            transition: 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            background: rgba(255,255,255,0.9);
+            box-shadow: 0 25px 40px -18px #1e3c7250;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #14273e;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-bottom: 2px dashed #b3c7e5;
+            padding-bottom: 0.75rem;
+        }
+
+        .card-title i {
+            color: #2f5e9c;
+            font-size: 1.5rem;
+            width: 2rem;
+        }
+
+        .selector-area {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .select-input {
+            background: white;
+            border: 1px solid #d4e0f0;
+            border-radius: 40px;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            color: #14273e;
+            font-weight: 500;
+            outline: none;
+            cursor: pointer;
+            transition: 0.15s;
+            box-shadow: inset 0 2px 5px #00000008;
+        }
+
+        .select-input:focus {
+            border-color: #2f5e9c;
+            box-shadow: 0 0 0 3px #2f5e9c30;
+        }
+
+        .query-btn {
+            background: white;
+            border: 1px solid #b9d0ef;
+            color: #1d3a5c;
+            padding: 0.8rem 1rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            transition: 0.15s;
+            box-shadow: 0 4px 12px #c0d2f030;
+        }
+
+        .query-btn:hover {
+            background: #e5efff;
+            border-color: #2f5e9c;
+            color: #0d2b4b;
+            transform: scale(1.02);
+        }
+
+        .query-btn i {
+            font-size: 0.95rem;
+        }
+
+        .result-panel {
+            background: #f7faff;
+            border-radius: 1.5rem;
+            padding: 1.5rem 1.2rem;
+            margin-top: 0.8rem;
+            border: 1px solid #e7f0fd;
+            box-shadow: inset 0 2px 6px #cad8ec30;
+            flex: 1;
+            min-height: 200px;
+        }
+
+        .method-item {
+            background: white;
+            border-radius: 1.2rem;
+            padding: 1rem 1rem 1.2rem;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 6px 14px #dbe4f2;
+            border: 1px solid #ffffff;
+        }
+
+        .method-item h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #17345c;
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .method-item h4 i {
+            color: #2a5f9e;
+            font-size: 0.9rem;
+        }
+
+        .method-item p {
+            font-size: 0.85rem;
+            color: #3d5f8b;
+            margin-bottom: 0.5rem;
+        }
+
+        .simulate-input-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 0.6rem 0 0.2rem;
+        }
+
+        .sim-input {
+            background: #f3f7ff;
+            border: 1px solid #c7daf5;
+            border-radius: 30px;
+            padding: 0.6rem 1rem;
+            font-size: 0.85rem;
+            flex: 1 1 120px;
+            color: #102a44;
+        }
+
+        .sim-input::placeholder {
+            color: #7e95b9;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        .sim-btn {
+            background: #dce7fc;
+            border: none;
+            border-radius: 30px;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #173868;
+            cursor: pointer;
+            transition: 0.1s;
+            border: 1px solid #aec6ee;
+            white-space: nowrap;
+        }
+
+        .sim-btn:hover {
+            background: #c2d6f5;
+        }
+
+        .tip-badge {
+            background: #e3eefb;
+            border-radius: 30px;
+            padding: 0.25rem 1rem;
+            font-size: 0.8rem;
+            color: #203e6b;
+            display: inline-block;
+            margin-top: 0.4rem;
+            font-weight: 500;
+        }
+
+        /* 市场透视区域卡片样式 */
+        .market-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+        .market-region-card {
+            background: white;
+            border-radius: 1.2rem;
+            padding: 1rem;
+            flex: 1 1 calc(50% - 0.5rem);
+            min-width: 160px;
+            box-shadow: 0 4px 10px rgba(0,20,50,0.05);
+            border: 1px solid #e3ebf6;
+        }
+        .region-name {
+            font-weight: 600;
+            color: #1e3c72;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+        .heat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #17345c;
+            line-height: 1.2;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .trend {
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+            background: #eaf2ff;
+            border-radius: 30px;
+            padding: 0.2rem 0.7rem;
+        }
+        .trend.up {
+            color: #0f7b3a;
+        }
+        .trend.down {
+            color: #b13e3e;
+        }
+        .trend.stable {
+            color: #a0671d;
+        }
+        .channel-list {
+            margin-top: 0.8rem;
+            font-size: 0.85rem;
+            color: #2d4b7a;
+        }
+        .channel-list span {
+            display: inline-block;
+            background: #e8f0fe;
+            border-radius: 30px;
+            padding: 0.2rem 0.8rem;
+            margin: 0.2rem 0.2rem;
+            font-size: 0.75rem;
+        }
+        .market-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+        .market-header .title {
+            font-weight: 600;
+            color: #14273e;
+        }
+
+        .content-tip-list {
+            list-style: none;
+            padding-left: 0.3rem;
+        }
+        .content-tip-list li {
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        .content-tip-list li i {
+            color: #1f8b4c;
+            margin-top: 0.2rem;
+        }
+        .caution-box {
+            background: #ffeae5;
+            border-radius: 1rem;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        .example-tag {
+            background: #e0ebff;
+            border-radius: 30px;
+            padding: 0.2rem 1rem;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-right: 0.4rem;
+            margin-bottom: 0.3rem;
+            color: #1e3e6e;
+        }
+
+        footer {
+            margin-top: 1.5rem;
+            text-align: center;
+            color: #5b739b;
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        @media (max-width: 900px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            .toolbox {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="toolbox">
+        <div class="header">
+            <h1>
+                <i class="fas fa-toolbox"></i> 
+                外贸客户开发技能箱
+            </h1>
+            <button class="one-click-btn" id="oneClickBtn">
+                <i class="fas fa-bolt"></i> 一键查询 · 智能演示
+            </button>
+        </div>
+
+        <div class="card-grid">
+            <!-- 卡片 1: 客户开发渠道 (每个平台专属方法) -->
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-bullhorn"></i> 客户开发渠道
+                </div>
+                <div class="selector-area">
+                    <select class="select-input" id="socialSelect1">
+                        <option value="facebook">Facebook</option>
+                        <option value="linkedin">LinkedIn</option>
+                        <option value="instagram">Instagram</option>
+                        <option value="tiktok">TikTok</option>
+                        <option value="twitter">Twitter (X)</option>
+                        <option value="whatsapp">WhatsApp</option>
+                        <option value="youtube">YouTube</option>
+                    </select>
+                    <button class="query-btn" id="queryChannelBtn">
+                        <i class="fas fa-magnifying-glass"></i> 查询开发方法
+                    </button>
+                </div>
+                <div class="result-panel" id="channelResult"></div>
+            </div>
+
+            <!-- 卡片 2: 市场透视 (已新增箱包/户外/居家) -->
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-globe"></i> 市场透视
+                </div>
+                <div class="selector-area">
+                    <div class="two-col-select">
+                        <select class="select-input" id="industrySelect"></select>
+                        <select class="select-input" id="productSelect"></select>
+                    </div>
+                    <button class="query-btn" id="queryMarketBtn">
+                        <i class="fas fa-chart-simple"></i> 查询市场透视
+                    </button>
+                </div>
+                <div class="result-panel" id="marketResult"></div>
+            </div>
+
+            <!-- 卡片 3: 社媒内容创作 -->
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-video"></i> 社媒内容创作
+                </div>
+                <div class="selector-area">
+                    <select class="select-input" id="socialSelect3">
+                        <option value="tiktok">TikTok</option>
+                        <option value="instagram">Instagram Reels</option>
+                        <option value="youtube">YouTube Shorts</option>
+                        <option value="facebook">Facebook Reels</option>
+                        <option value="linkedin">LinkedIn 视频</option>
+                        <option value="twitter">Twitter 视频</option>
+                    </select>
+                    <button class="query-btn" id="queryContentBtn">
+                        <i class="fas fa-lightbulb"></i> 创作技巧
+                    </button>
+                </div>
+                <div class="result-panel" id="contentResult"></div>
+            </div>
+        </div>
+        <footer>
+            <i class="fas fa-compass"></i> 点击查询按钮查看对应策略 · 新增箱包/户外/居家三大品类
+        </footer>
+    </div>
+
+    <script>
+        (function() {
+            // ----- 行业与产品映射 (已新增箱包、户外旅行、居家用品) -----
+            const industryProducts = {
+                electronics: {
+                    name: '电子产品',
+                    products: [
+                        { value: 'smartphone', label: '智能手机' },
+                        { value: 'laptop', label: '笔记本电脑' },
+                        { value: 'tablet', label: '平板电脑' },
+                        { value: 'headphones', label: '耳机/耳麦' },
+                        { value: 'smartwatch', label: '智能手表' },
+                        { value: 'powerbank', label: '充电宝' },
+                        { value: 'cable', label: '数据线' },
+                        { value: 'bluetooth_speaker', label: '蓝牙音箱' },
+                        { value: 'drone', label: '无人机' },
+                        { value: 'camera', label: '相机' },
+                        { value: 'docking_station', label: '拓展坞' },
+                        { value: 'e_cigarette', label: '电子烟' },
+                        { value: 'vr_headset', label: 'VR眼镜' }
+                    ]
+                },
+                textiles: {
+                    name: '纺织品',
+                    products: [
+                        { value: 'garments', label: '服装' },
+                        { value: 'towels', label: '毛巾/浴巾' },
+                        { value: 'bedding', label: '床上用品' },
+                        { value: 'fabric', label: '面料' },
+                        { value: 'yarn', label: '纱线' },
+                        { value: 'carpet', label: '地毯' },
+                        { value: 'curtain', label: '窗帘' },
+                        { value: 'accessories', label: '服装辅料' },
+                        { value: 'home_textile', label: '家用纺织品' }
+                    ]
+                },
+                machinery: {
+                    name: '机械设备',
+                    products: [
+                        { value: 'cnc', label: '数控机床' },
+                        { value: 'construction', label: '工程机械' },
+                        { value: 'agriculture', label: '农业机械' },
+                        { value: 'food_processing', label: '食品加工机械' },
+                        { value: 'packaging', label: '包装机械' },
+                        { value: 'injection_molding', label: '注塑机' },
+                        { value: 'laser_cutter', label: '激光切割机' },
+                        { value: 'industrial_robot', label: '工业机器人' },
+                        { value: 'textile_machinery', label: '纺织机械' }
+                    ]
+                },
+                furniture: {
+                    name: '家居用品',
+                    products: [
+                        { value: 'sofa', label: '沙发' },
+                        { value: 'bed', label: '床' },
+                        { value: 'table', label: '桌子' },
+                        { value: 'chair', label: '椅子' },
+                        { value: 'cabinet', label: '橱柜' },
+                        { value: 'lighting', label: '灯具' },
+                        { value: 'decoration', label: '装饰品' },
+                        { value: 'outdoor_furniture', label: '户外家具' },
+                        { value: 'smart_furniture', label: '智能家具' }
+                    ]
+                },
+                auto: {
+                    name: '汽车配件',
+                    products: [
+                        { value: 'tyre', label: '轮胎' },
+                        { value: 'brake_pad', label: '刹车片' },
+                        { value: 'headlight', label: '车灯' },
+                        { value: 'battery', label: '蓄电池' },
+                        { value: 'engine_parts', label: '发动机配件' },
+                        { value: 'interior', label: '内饰' },
+                        { value: 'auto_electronics', label: '汽车电子' },
+                        { value: 'car_charger', label: '车载充电器' }
+                    ]
+                },
+                cosmetics: {
+                    name: '化妆品',
+                    products: [
+                        { value: 'skincare', label: '护肤品' },
+                        { value: 'makeup', label: '彩妆' },
+                        { value: 'perfume', label: '香水' },
+                        { value: 'hair_care', label: '美发产品' },
+                        { value: 'beauty_tools', label: '美容工具' },
+                        { value: 'nail', label: '美甲产品' },
+                        { value: 'body_care', label: '身体护理' },
+                        { value: 'beauty_device', label: '美容仪' }
+                    ]
+                },
+                food: {
+                    name: '食品饮料',
+                    products: [
+                        { value: 'snacks', label: '休闲食品' },
+                        { value: 'beverage', label: '饮料' },
+                        { value: 'canned', label: '罐头食品' },
+                        { value: 'frozen', label: '冷冻食品' },
+                        { value: 'organic', label: '有机食品' },
+                        { value: 'health_food', label: '保健品' },
+                        { value: 'functional_drink', label: '功能饮料' }
+                    ]
+                },
+                medical: {
+                    name: '医疗设备',
+                    products: [
+                        { value: 'diagnostic', label: '诊断设备' },
+                        { value: 'surgical', label: '手术器械' },
+                        { value: 'monitor', label: '病人监护仪' },
+                        { value: 'ventilator', label: '呼吸机' },
+                        { value: 'consumables', label: '医疗耗材' },
+                        { value: 'home_health', label: '家用健康设备' }
+                    ]
+                },
+                sports: {
+                    name: '体育用品',
+                    products: [
+                        { value: 'fitness', label: '健身器材' },
+                        { value: 'outdoor', label: '户外装备' },
+                        { value: 'team_sports', label: '球类运动' },
+                        { value: 'yoga', label: '瑜伽用品' },
+                        { value: 'protection', label: '护具' },
+                        { value: 'fitness_tracker', label: '健身追踪器' }
+                    ]
+                },
+                toys: {
+                    name: '玩具',
+                    products: [
+                        { value: 'electronic_toys', label: '电子玩具' },
+                        { value: 'dolls', label: '娃娃' },
+                        { value: 'educational', label: '益智玩具' },
+                        { value: 'outdoor_toys', label: '户外玩具' },
+                        { value: 'model', label: '模型' },
+                        { value: 'stem_toys', label: 'STEM玩具' }
+                    ]
+                },
+                jewelry: {
+                    name: '珠宝首饰',
+                    products: [
+                        { value: 'necklace', label: '项链' },
+                        { value: 'ring', label: '戒指' },
+                        { value: 'earring', label: '耳环' },
+                        { value: 'bracelet', label: '手链' },
+                        { value: 'watch', label: '手表' },
+                        { value: 'custom_jewelry', label: '定制首饰' }
+                    ]
+                },
+                building: {
+                    name: '建筑材料',
+                    products: [
+                        { value: 'cement', label: '水泥' },
+                        { value: 'steel', label: '钢材' },
+                        { value: 'tile', label: '瓷砖' },
+                        { value: 'paint', label: '涂料' },
+                        { value: 'insulation', label: '保温材料' },
+                        { value: 'green_material', label: '绿色建材' }
+                    ]
+                },
+                chemical: {
+                    name: '化工产品',
+                    products: [
+                        { value: 'industrial_chemical', label: '工业化学品' },
+                        { value: 'plastic_raw', label: '塑料原料' },
+                        { value: 'rubber', label: '橡胶' },
+                        { value: 'fertilizer', label: '肥料' },
+                        { value: 'pesticide', label: '农药' },
+                        { value: 'specialty_chemical', label: '特种化学品' }
+                    ]
+                },
+                energy: {
+                    name: '新能源',
+                    products: [
+                        { value: 'solar_panel', label: '太阳能板' },
+                        { value: 'battery_storage', label: '储能电池' },
+                        { value: 'ev_charger', label: '充电桩' },
+                        { value: 'wind_turbine', label: '风力发电机' },
+                        { value: 'energy_storage', label: '储能系统' }
+                    ]
+                },
+                lighting: {
+                    name: '照明产品',
+                    products: [
+                        { value: 'led', label: 'LED灯' },
+                        { value: 'smart_light', label: '智能照明' },
+                        { value: 'commercial', label: '商业照明' },
+                        { value: 'decorative', label: '装饰灯' },
+                        { value: 'smart_bulb', label: '智能灯泡' }
+                    ]
+                },
+                pet: {
+                    name: '宠物用品',
+                    products: [
+                        { value: 'pet_food', label: '宠物食品' },
+                        { value: 'pet_toys', label: '宠物玩具' },
+                        { value: 'pet_bed', label: '宠物窝' },
+                        { value: 'grooming', label: '美容用品' },
+                        { value: 'smart_pet', label: '智能宠物用品' }
+                    ]
+                },
+                // 新增：箱包
+                luggage: {
+                    name: '箱包',
+                    products: [
+                        { value: 'suitcase', label: '拉杆箱' },
+                        { value: 'backpack', label: '双肩包' },
+                        { value: 'handbag', label: '手提包' },
+                        { value: 'messenger_bag', label: '斜挎包' },
+                        { value: 'travel_bag', label: '旅行袋' },
+                        { value: 'business_bag', label: '商务包' },
+                        { value: 'laptop_bag', label: '电脑包' },
+                        { value: 'cosmetic_bag', label: '化妆包' },
+                        { value: 'luggage_tag', label: '行李牌' },
+                        { value: 'luggage_cover', label: '箱包保护套' }
+                    ]
+                },
+                // 新增：户外旅行
+                outdoor_travel: {
+                    name: '户外旅行',
+                    products: [
+                        { value: 'tent', label: '帐篷' },
+                        { value: 'sleeping_bag', label: '睡袋' },
+                        { value: 'hiking_shoes', label: '登山鞋' },
+                        { value: 'camping_stove', label: '露营炉' },
+                        { value: 'headlamp', label: '头灯' },
+                        { value: 'trekking_pole', label: '登山杖' },
+                        { value: 'water_bottle', label: '户外水壶' },
+                        { value: 'first_aid_kit', label: '急救包' },
+                        { value: 'compass', label: '指南针' },
+                        { value: 'camping_chair', label: '折叠椅' },
+                        { value: 'cooler', label: '保温箱' },
+                        { value: 'hammock', label: '吊床' }
+                    ]
+                },
+                // 新增：居家用品 (含收纳等)
+                home_essentials: {
+                    name: '居家用品',
+                    products: [
+                        { value: 'storage_box', label: '收纳盒' },
+                        { value: 'storage_basket', label: '收纳篮' },
+                        { value: 'shelf', label: '置物架' },
+                        { value: 'hanger', label: '衣架' },
+                        { value: 'shoe_rack', label: '鞋架' },
+                        { value: 'laundry_basket', label: '脏衣篮' },
+                        { value: 'kitchen_organizer', label: '厨房收纳' },
+                        { value: 'bathroom_organizer', label: '浴室收纳' },
+                        { value: 'drawer_divider', label: '抽屉分隔板' },
+                        { value: 'vacuum_storage_bag', label: '真空压缩袋' },
+                        { value: 'closet_organizer', label: '衣柜收纳' },
+                        { value: 'under_bed_storage', label: '床底收纳' }
+                    ]
+                }
+            };
+
+            // ----- 获取DOM元素 -----
+            const socialSelect1 = document.getElementById('socialSelect1');
+            const queryChannelBtn = document.getElementById('queryChannelBtn');
+            const channelResult = document.getElementById('channelResult');
+
+            const industrySelect = document.getElementById('industrySelect');
+            const productSelect = document.getElementById('productSelect');
+            const queryMarketBtn = document.getElementById('queryMarketBtn');
+            const marketResult = document.getElementById('marketResult');
+
+            const socialSelect3 = document.getElementById('socialSelect3');
+            const queryContentBtn = document.getElementById('queryContentBtn');
+            const contentResult = document.getElementById('contentResult');
+
+            const oneClickBtn = document.getElementById('oneClickBtn');
+
+            // ----- 初始化行业下拉框 (中文) -----
+            function populateIndustries() {
+                for (let key in industryProducts) {
+                    let option = document.createElement('option');
+                    option.value = key;
+                    option.textContent = industryProducts[key].name;
+                    industrySelect.appendChild(option);
+                }
+            }
+            populateIndustries();
+
+            // ----- 根据行业更新产品下拉框 -----
+            function updateProductSelect(industryKey) {
+                const products = industryProducts[industryKey]?.products || industryProducts.electronics.products;
+                productSelect.innerHTML = '';
+                products.forEach(p => {
+                    let option = document.createElement('option');
+                    option.value = p.value;
+                    option.textContent = p.label;
+                    productSelect.appendChild(option);
+                });
+            }
+            // 默认选中电子产品
+            industrySelect.value = 'electronics';
+            updateProductSelect('electronics');
+
+            // 行业改变时联动更新产品
+            industrySelect.addEventListener('change', function(e) {
+                updateProductSelect(e.target.value);
+            });
+
+            // ----- 客户开发方法 (每个平台专属) -----
+            function getChannelMethods(media) {
+                const mediaName = {
+                    facebook: 'Facebook',
+                    linkedin: 'LinkedIn',
+                    instagram: 'Instagram',
+                    tiktok: 'TikTok',
+                    twitter: 'Twitter',
+                    whatsapp: 'WhatsApp',
+                    youtube: 'YouTube'
+                }[media] || media;
+
+                // 根据平台定制第三个方法
+                let thirdMethod = {
+                    title: '',
+                    desc: '',
+                    placeholder: '',
+                    btnText: '',
+                    icon: 'fas fa-comment'
+                };
+                switch(media) {
+                    case 'facebook':
+                        thirdMethod.title = '方法三：通过 Facebook Messenger 触达';
+                        thirdMethod.desc = '在客户主页找到 Messenger 按钮，直接发送消息，或加入行业群组后私信群友。';
+                        thirdMethod.placeholder = '输入客户姓名或公司名搜索对话';
+                        thirdMethod.btnText = '打开 Messenger';
+                        break;
+                    case 'linkedin':
+                        thirdMethod.title = '方法三：通过 LinkedIn InMail 联系';
+                        thirdMethod.desc = '使用 LinkedIn 站内信联系决策人，需高级账号或建立连接后发送消息。';
+                        thirdMethod.placeholder = '输入客户姓名或职位关键词';
+                        thirdMethod.btnText = '发送 InMail';
+                        break;
+                    case 'instagram':
+                        thirdMethod.title = '方法三：通过 Instagram DM 私信';
+                        thirdMethod.desc = '关注客户后发送私信，或通过故事互动建立联系。';
+                        thirdMethod.placeholder = '输入客户 Instagram 账号';
+                        thirdMethod.btnText = '发送私信';
+                        break;
+                    case 'tiktok':
+                        thirdMethod.title = '方法三：通过 TikTok 私信联系';
+                        thirdMethod.desc = '关注客户账号，通过私信功能发送产品介绍。';
+                        thirdMethod.placeholder = '输入客户 TikTok 账号';
+                        thirdMethod.btnText = '发送私信';
+                        break;
+                    case 'twitter':
+                        thirdMethod.title = '方法三：通过 Twitter DM 联系';
+                        thirdMethod.desc = '关注客户后发送私信，或通过推文互动。';
+                        thirdMethod.placeholder = '输入客户 Twitter 账号';
+                        thirdMethod.btnText = '发送 DM';
+                        break;
+                    case 'whatsapp':
+                        thirdMethod.title = '方法三：通过 WhatsApp 高效触达';
+                        thirdMethod.desc = '从展会、官网、行业论坛收集手机号，在 WhatsApp 内搜索联系。';
+                        thirdMethod.placeholder = '输入手机号，如 +1 555 1234567';
+                        thirdMethod.btnText = '在 WhatsApp 搜索';
+                        break;
+                    case 'youtube':
+                        thirdMethod.title = '方法三：通过 YouTube 评论区或频道私信';
+                        thirdMethod.desc = '在客户视频下方评论，或通过频道“关于”页面的邮箱联系。';
+                        thirdMethod.placeholder = '输入客户频道名或邮箱';
+                        thirdMethod.btnText = '评论/私信';
+                        break;
+                    default:
+                        thirdMethod.title = '方法三：通过该平台私信功能联系';
+                        thirdMethod.desc = '使用平台内置聊天功能触达潜在客户。';
+                        thirdMethod.placeholder = '输入客户账号';
+                        thirdMethod.btnText = '发送消息';
+                }
+
+                return `
+                    <div class="method-item">
+                        <h4><i class="fas fa-users"></i> 方法一（${mediaName}）：产品+国家找行业群</h4>
+                        <div class="simulate-input-group">
+                            <input class="sim-input" placeholder="产品, e.g. yoga mat" value="yoga mat" id="prod1_${media}">
+                            <input class="sim-input" placeholder="国家, e.g. USA" value="USA" id="country1_${media}">
+                            <button class="sim-btn" onclick="alert('演示模式：尝试在${mediaName}查找「'+document.getElementById('prod1_${media}').value+' '+document.getElementById('country1_${media}').value+'」群组')"><i class="far fa-paper-plane"></i> 查找群组</button>
+                        </div>
+                        <span class="tip-badge"><i class="far fa-lightbulb"></i> 加入后参与讨论，避免硬广</span>
+                    </div>
+                    <div class="method-item">
+                        <h4><i class="fas fa-building"></i> 方法二（${mediaName}）：搜客户主页 (公司/负责人)</h4>
+                        <div class="simulate-input-group">
+                            <input class="sim-input" placeholder="客户公司名 或 负责人名字" value="EcoFit LLC" id="companyName_${media}">
+                            <button class="sim-btn" onclick="alert('模拟搜索: 在${mediaName}查找「'+document.getElementById('companyName_${media}').value+'」')"><i class="fas fa-magnifying-glass"></i> 搜索</button>
+                        </div>
+                        <span class="tip-badge"><i class="far fa-comment"></i> 浏览主页获取邮箱/电话</span>
+                    </div>
+                    <div class="method-item">
+                        <h4><i class="${thirdMethod.icon}"></i> ${thirdMethod.title}</h4>
+                        <p>${thirdMethod.desc}</p>
+                        <div class="simulate-input-group">
+                            <input class="sim-input" placeholder="${thirdMethod.placeholder}" value="${media === 'whatsapp' ? '+1 555 1234567' : '@example'}" id="contact_${media}">
+                            <button class="sim-btn" onclick="alert('演示：尝试通过${mediaName}联系 ' + document.getElementById('contact_${media}').value)"><i class="fas fa-paper-plane"></i> ${thirdMethod.btnText}</button>
+                        </div>
+                        <span class="tip-badge"><i class="far fa-clock"></i> 最佳联系时间根据平台而定</span>
+                    </div>
+                `;
+            }
+
+            // ----- 市场透视：区域卡片展示 -----
+            function getMarketInsight(industryKey, productValue) {
+                const industry = industryProducts[industryKey]?.name || industryKey;
+                const productObj = industryProducts[industryKey]?.products.find(p => p.value === productValue);
+                const productDisplay = productObj ? productObj.label : productValue;
+
+                const regions = [
+                    { name: '北美', base: 90 },
+                    { name: '欧洲', base: 85 },
+                    { name: '澳洲', base: 75 },
+                    { name: '日韩', base: 82 },
+                    { name: '东南亚', base: 70 },
+                    { name: '中东', base: 65 },
+                    { name: '南美', base: 60 }
+                ];
+
+                const regionData = regions.map(r => {
+                    let heat = Math.min(99, Math.max(50, r.base + Math.floor(Math.random() * 16) - 8));
+                    const trendRand = Math.random();
+                    let trend = 'stable';
+                    if (trendRand < 0.4) trend = 'up';
+                    else if (trendRand < 0.7) trend = 'down';
+                    else trend = 'stable';
+
+                    let channels = [];
+                    if (r.name === '北美') channels = ['LinkedIn', '亚马逊', '行业展会'];
+                    else if (r.name === '欧洲') channels = ['领英', '本地B2B平台', '行业论坛'];
+                    else if (r.name === '澳洲') channels = ['Facebook', '本地电商'];
+                    else if (r.name === '日韩') channels = ['Line', '本地采购平台'];
+                    else if (r.name === '东南亚') channels = ['WhatsApp', 'Lazada/Shopee'];
+                    else if (r.name === '中东') channels = ['WhatsApp', '展会', '本地贸易商'];
+                    else if (r.name === '南美') channels = ['Facebook', 'MercadoLibre'];
+                    
+                    return { ...r, heat, trend, channels };
+                });
+
+                let html = `
+                    <div class="market-header">
+                        <span class="title">${industry} / ${productDisplay}</span>
+                    </div>
+                    <div class="market-grid">
+                `;
+                regionData.forEach(r => {
+                    let trendIcon = '';
+                    let trendClass = 'stable';
+                    if (r.trend === 'up') {
+                        trendIcon = '↑';
+                        trendClass = 'up';
+                    } else if (r.trend === 'down') {
+                        trendIcon = '↓';
+                        trendClass = 'down';
+                    } else {
+                        trendIcon = '→';
+                        trendClass = 'stable';
+                    }
+                    html += `
+                        <div class="market-region-card">
+                            <div class="region-name">${r.name}</div>
+                            <div class="heat-value">
+                                ${r.heat}
+                                <span class="trend ${trendClass}">${trendIcon} ${r.trend === 'up' ? '上升' : (r.trend === 'down' ? '下降' : '稳定')}</span>
+                            </div>
+                            <div class="channel-list">
+                                ${r.channels.map(c => `<span>${c}</span>`).join('')}
+                            </div>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+                return html;
+            }
+
+            // ----- 社媒创作技巧 -----
+            function getContentTips(media) {
+                const tipsDB = {
+                    tiktok: {
+                        tips: [
+                            '使用热门音乐和音效，紧跟潮流趋势',
+                            '开头3秒黄金法则：用强视觉或悬念抓住用户',
+                            '竖屏9:16拍摄，确保画面充满屏幕',
+                            '添加话题标签 #learnontiktok #fyp #外贸',
+                            '视频时长建议21-34秒，完播率最高',
+                            '互动引导：在视频中提问或让用户评论',
+                            '可以利用TikTok Shopping功能展示产品'
+                        ],
+                        caution: '避免硬推销，注重娱乐性和故事性；注意版权音乐限制；勿发布违规内容；避免搬运他人视频。',
+                        tags: '#TikTok外贸 #产品推广 #跨境电商'
+                    },
+                    instagram: {
+                        tips: [
+                            'Reels 使用原创音频或热门歌曲',
+                            '封面标题要吸睛，用大号文字说明主题',
+                            '多利用快节奏转场和特效',
+                            '@相关品牌或KOL 增加曝光',
+                            '视频时长15-30秒最佳',
+                            '添加位置标签和话题标签，如 #reels #外贸',
+                            '在评论区置顶引导语或链接'
+                        ],
+                        caution: '避免过度滤镜；引导用户保存或分享；遵守社区指引；勿发布误导性内容。',
+                        tags: '#InstagramReels #外贸技巧 #B2B'
+                    },
+                    youtube: {
+                        tips: [
+                            'Shorts 垂直视频，时长控制在60秒以内',
+                            '标题简短有力，前5秒展示产品卖点',
+                            '利用#Shorts 标签，增加推荐机会',
+                            '引导订阅，视频末尾添加关注动画',
+                            '缩略图要醒目，使用高对比度文字',
+                            '添加英语字幕方便国际观众',
+                            '在描述区放置链接或联系方式'
+                        ],
+                        caution: '缩略图尺寸合规；禁用敏感词；勿搬运；确保视频内容原创。',
+                        tags: '#YouTubeShorts #外贸B2B #产品演示'
+                    },
+                    facebook: {
+                        tips: [
+                            'Reels 配字幕 (因为很多用户无声观看)',
+                            '视频长度15-25秒，重点突出',
+                            '添加兴趣标签，如 #外贸 #制造',
+                            '@公共主页或相关群组',
+                            '使用Facebook的自动配乐功能',
+                            '在视频开头直接说明价值',
+                            '可以创建系列内容培养粉丝'
+                        ],
+                        caution: '避免误导性内容；勿频繁发布纯促销；注意隐私设置。',
+                        tags: '#FacebookReels #外贸推广 #制造'
+                    },
+                    linkedin: {
+                        tips: [
+                            '专业干货方向：分享行业知识或案例',
+                            '封面图规范，使用LinkedIn标准尺寸',
+                            '配文档/PPT展示数据或流程',
+                            '@提及关联公司或合作伙伴',
+                            '视频时长1-2分钟，深度解析',
+                            '添加话题标签，如 #manufacturing #export',
+                            '在评论区与专业人士互动'
+                        ],
+                        caution: '话题专业，避免夸张；不要过度标签；勿发布与职业无关的内容。',
+                        tags: '#LinkedInVideo #B2B外贸 #行业洞察'
+                    },
+                    twitter: {
+                        tips: [
+                            '简短快讯式，突出亮点',
+                            '使用热门话题和趋势标签',
+                            '配多图或动图吸引注意力',
+                            '引导转推和点赞，增加传播',
+                            '视频时长不超过2分20秒',
+                            '可以发布产品快闪或幕后花絮',
+                            '@相关行业大V 增加曝光'
+                        ],
+                        caution: '注意字符数；话题相关性；勿滥用敏感词；避免争议性内容。',
+                        tags: '#TwitterVideo #外贸 #产品展示'
+                    }
+                };
+                const data = tipsDB[media] || tipsDB['tiktok'];
+                const mediaDisplay = {tiktok:'TikTok', instagram:'Instagram Reels', youtube:'YouTube Shorts', facebook:'Facebook Reels', linkedin:'LinkedIn 视频', twitter:'Twitter 视频'}[media] || media;
+
+                let tipsHtml = `<div style="font-weight:600; margin-bottom:1rem;"><i class="fas fa-film"></i> ${mediaDisplay} 创作技巧</div>`;
+                tipsHtml += '<ul class="content-tip-list">';
+                data.tips.forEach((tip, idx) => {
+                    tipsHtml += `<li><i class="fas fa-check-circle"></i>${tip}</li>`;
+                });
+                tipsHtml += `</ul>`;
+                tipsHtml += `<div class="caution-box"><i class="fas fa-exclamation-triangle" style="color:#b85c00;"></i> <strong>注意事项：</strong>${data.caution}</div>`;
+                if (data.tags) {
+                    tipsHtml += `<div style="margin-top:0.8rem;"><i class="fas fa-hashtag" style="color:#3266a4;"></i> 推荐标签：<span class="example-tag">${data.tags.split(' ').join('</span> <span class="example-tag">')}</span></div>`;
+                }
+                return tipsHtml;
+            }
+
+            // ----- 渲染函数 -----
+            function renderChannel(media) {
+                channelResult.innerHTML = getChannelMethods(media);
+            }
+
+            function renderMarket() {
+                const industry = industrySelect.value;
+                const product = productSelect.value;
+                marketResult.innerHTML = getMarketInsight(industry, product);
+            }
+
+            function renderContent(media) {
+                contentResult.innerHTML = getContentTips(media);
+            }
+
+            // ----- 事件绑定 -----
+            queryChannelBtn.addEventListener('click', () => {
+                renderChannel(socialSelect1.value);
+                queryChannelBtn.style.transform = 'scale(0.98)';
+                setTimeout(() => queryChannelBtn.style.transform = '', 100);
+            });
+
+            queryMarketBtn.addEventListener('click', () => {
+                renderMarket();
+                queryMarketBtn.style.transform = 'scale(0.98)';
+                setTimeout(() => queryMarketBtn.style.transform = '', 100);
+            });
+
+            queryContentBtn.addEventListener('click', () => {
+                renderContent(socialSelect3.value);
+                queryContentBtn.style.transform = 'scale(0.98)';
+                setTimeout(() => queryContentBtn.style.transform = '', 100);
+            });
+
+            // ----- 一键查询 (演示拓展坞) -----
+            oneClickBtn.addEventListener('click', () => {
+                socialSelect1.value = 'linkedin';
+                renderChannel('linkedin');
+                industrySelect.value = 'electronics';
+                updateProductSelect('electronics');
+                productSelect.value = 'docking_station';
+                renderMarket();
+                socialSelect3.value = 'instagram';
+                renderContent('instagram');
+                alert('✨ 一键演示：已为您填充电子产品/拓展坞，市场透视采用区域卡片展示。');
+            });
+
+            // 初始化结果区域为空
+            channelResult.innerHTML = '';
+            marketResult.innerHTML = '';
+            contentResult.innerHTML = '';
+        })();
+    </script>
+</body>
+</html>
