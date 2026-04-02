@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>海外社媒揭秘 | 谷歌+Facebook 信息流实战</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f0f2f5;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            color: #1a2c3e;
+            line-height: 1.4;
+            padding: 2rem 1.5rem;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 2rem;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1877f2 0%, #0d5fd9 100%);
+            padding: 2rem 2rem 1.5rem 2rem;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1rem;
+            max-width: 80%;
+        }
+
+        .selector-area {
+            padding: 1.8rem 2rem 1.2rem 2rem;
+            background: #ffffff;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            gap: 1.2rem;
+            border-bottom: 1px solid #eef2f8;
+        }
+
+        .select-group {
+            flex: 2;
+            min-width: 220px;
+        }
+
+        .select-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #4f6f8f;
+            margin-bottom: 0.5rem;
+        }
+
+        .custom-select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            font-size: 1rem;
+            border: 1px solid #cfdfed;
+            border-radius: 1.2rem;
+            background-color: white;
+            font-family: 'Inter', monospace;
+            color: #1e2f3e;
+            cursor: pointer;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .custom-select:focus {
+            border-color: #1877f2;
+            box-shadow: 0 0 0 3px rgba(24,119,242,0.2);
+        }
+
+        .btn-reveal {
+            background: #1877f2;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 2rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn-reveal:hover {
+            background: #0d5fd9;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-section {
+            padding: 2rem;
+            background: #f7f9fc;
+        }
+
+        .insight-card {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid #eef2fa;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        }
+
+        .card-header {
+            padding: 1rem 1.8rem;
+            background: #fafcff;
+            border-bottom: 1px solid #eef2f8;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .card-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a3b4f;
+        }
+
+        .badge-icon {
+            font-size: 1.6rem;
+        }
+
+        .card-body {
+            padding: 1.5rem 1.8rem;
+        }
+
+        .feature-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            align-items: flex-start;
+            background: #fefefe;
+            border-radius: 1.2rem;
+            padding: 1rem;
+            border: 1px solid #f0f2f5;
+        }
+
+        .feature-desc {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .feature-desc strong {
+            font-size: 1.1rem;
+            color: #1877f2;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-desc p {
+            color: #4a627a;
+            line-height: 1.5;
+        }
+
+        .feature-screenshot {
+            flex: 1;
+            min-width: 260px;
+            background: #ffffff;
+            border-radius: 1rem;
+            border: 1px solid #e2edf7;
+            text-align: center;
+            padding: 0.8rem;
+        }
+
+        .feature-screenshot img {
+            width: 100%;
+            height: auto;
+            border-radius: 0.8rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            background: #fff;
+        }
+
+        .screenshot-caption {
+            font-size: 0.75rem;
+            color: #6c86a0;
+            margin-top: 0.6rem;
+            font-weight: 500;
+        }
+
+        .step-item {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eef2fa;
+            padding-bottom: 1.5rem;
+        }
+
+        .step-item:last-child {
+            border-bottom: none;
+        }
+
+        .step-title {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #1877f2;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-number {
+            background: #1877f2;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .guide-media-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 0.8rem;
+        }
+
+        .guide-text {
+            flex: 1;
+            color: #3b4e62;
+            line-height: 1.6;
+        }
+
+        .guide-img {
+            flex: 1;
+            min-width: 240px;
+        }
+
+        .guide-img img {
+            width: 100%;
+            border-radius: 0.8rem;
+            border: 1px solid #e2edf7;
+            background: #f9fbfe;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .insight-note {
+            background: #e8f4fd;
+            border-left: 4px solid #1877f2;
+            padding: 1rem 1.2rem;
+            border-radius: 1rem;
+            margin-top: 1rem;
+        }
+
+        .metrics-card {
+            background: linear-gradient(135deg, #1877f2 0%, #0d5fd9 100%);
+            color: white;
+            border-radius: 1rem;
+            padding: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .important-tip {
+            background: #fff8e7;
+            border-left: 4px solid #f5b042;
+            padding: 0.8rem 1rem;
+            border-radius: 0.8rem;
+            margin-top: 0.8rem;
+            font-size: 0.85rem;
+        }
+
+        footer {
+            background: #fafcff;
+            border-top: 1px solid #eef2f8;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.8rem;
+            color: #7c8ea0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            .hero p {
+                max-width: 100%;
+            }
+            .feature-item, .guide-media-row {
+                flex-direction: column;
+            }
+            .card-body {
+                padding: 1.2rem;
+            }
+            .selector-area {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        
+        .fb-badge {
+            background: #1877f2;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .google-badge {
+            background: #4285F4;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .infoflow-tag {
+            background: #e7f3ff;
+            color: #1877f2;
+            font-size: 0.7rem;
+            border-radius: 30px;
+            padding: 0.2rem 0.7rem;
+            display: inline-block;
+            margin-top: 0.3rem;
+        }
+        
+        /* 信息流卡片样式 */
+        .flow-card {
+            background: #f8fafc;
+            border-radius: 0.8rem;
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid #e2edf7;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #1e4663;
+        }
+        .flow-card strong {
+            color: #1877f2;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .flow-card ul {
+            padding-left: 1.2rem;
+            margin: 0.3rem 0;
+        }
+        .flow-card li {
+            margin-bottom: 0.3rem;
+        }
+        .flow-emoji {
+            font-size: 1rem;
+            margin-right: 4px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <h1>📘 海外社媒揭秘 · 谷歌+Facebook 信息流实战</h1>
+        <p>每个功能点都配有清晰的信息流示意图，快速get关键信息，小白也能轻松上手</p>
+    </div>
+
+    <div class="selector-area">
+        <div class="select-group">
+            <label>📱 选择社交媒体平台</label>
+            <select id="socialSelect" class="custom-select">
+                <option value="facebook">Facebook | 脸书</option>
+                <option value="google">Google Business Profile | 谷歌商家档案</option>
+                <option value="linkedin">LinkedIn | 领英（敬请期待）</option>
+                <option value="instagram">Instagram | 照片墙（敬请期待）</option>
+            </select>
+        </div>
+        <button id="revealBtn" class="btn-reveal">🔍 开始揭秘 · 信息流学习</button>
+    </div>
+
+    <div id="dynamicContent" class="content-section">
+        <div class="insight-card" style="background:#fafdff; text-align:center; padding: 2rem;">
+            <span style="font-size: 3rem;">⚡</span>
+            <p style="margin-top: 1rem; color:#527a9b;">点击「开始揭秘」按钮，每个板块都会配有直观信息流示意图<br>告别复杂截图，快速掌握Facebook / 谷歌商家档案的核心功能与获客流程</p>
+        </div>
+    </div>
+    <footer>
+        ✅ 所有配图均为「信息流示意图」（纯文本+图标，100%可见），聚焦关键信息，帮助您快速理解功能定位与操作逻辑<br>
+        📌 手把手图文指南，每个步骤配合信息图，对照理解，即学即用
+    </footer>
+</div>
+
+<script>
+    // --------------------------------------------------------------
+    // 新增 Google Business Profile (谷歌商家档案) 完整数据
+    // 结构与 Facebook 保持一致：起源、核心功能区、开发客户实战指南、额外模块
+    // 所有信息流使用纯文本卡片，保证无空白
+    // 重要：在第1步中增加了针对国内公司地址填写的详细备注
+    // --------------------------------------------------------------
+    
+    // 谷歌功能区信息流内容映射
+    const googleFeatureFlowContent = {
+        "商家档案首页": { 
+            title: "📌 商家档案首页 信息流",
+            points: ["登录 Google Maps / 搜索商家档案管理中心", "查看店铺信息概览", "展示客户留下的评分/评论", "直接编辑基本资料"]
+        },
+        "信息编辑区": { 
+            title: "✏️ 信息编辑区 信息流",
+            points: ["完善公司名称/地址/电话(NAP)", "添加上班时间/网站链接", "上传高质量产品/店铺照片", "保持信息最新 提升客户信任"]
+        },
+        "评论管理区": { 
+            title: "⭐ 评论管理区 信息流",
+            points: ["查看所有客户评价与打分", "及时回复好评+感谢客户", "诚恳回应差评并解决问题", "高星评论提升本地搜索排名"]
+        },
+        "数据分析区": { 
+            title: "📊 数据分析区 信息流",
+            points: ["查看搜索曝光次数", "分析客户行为: 查看照片/打电话/查路线", "追踪帖子互动效果", "优化运营策略"]
+        },
+        "帖子发布区": { 
+            title: "📢 帖子发布区 信息流",
+            points: ["发布产品更新/促销活动", "添加图片/视频/行动按钮", "帖子展示在谷歌搜索/地图中", "免费增加品牌曝光"]
+        }
+    };
+    
+    // 谷歌步骤信息流内容映射（第一步包含详细地址填写备注）
+    const googleStepFlowContent = {
+        "创建/认领谷歌商家档案": {
+            title: "🏪 创建商家档案 信息流程",
+            steps: [
+                "访问 business.google.com",
+                "点击「添加到谷歌」",
+                "输入公司名称/地址（见下方重要备注）",
+                "选择业务类别",
+                "验证所有权（明信片/电话/邮箱）"
+            ],
+            specialNote: "⚠️ 【国内公司地址填写重要备注】①国家选择「中国」，地址填写你真实能收件的办公/家庭地址（拼音/英文，如 No.123 Xinhua Road）。谷歌会寄送明信片验证，收不到验证码无法创建。②不要使用虚拟地址或海外代收地址，极易封号。③验证通过后，在后台「信息」设置中勾选「不显示我的营业地址」，并设置「服务区域」为海外目标市场（如 United States, European Union）。这样海外客户只会看到你服务海外，不会看到你的国内地址。"
+        },
+        "完善档案信息并优化": {
+            title: "✨ 完善档案信息 信息流程",
+            steps: ["填写完整地址/电话/官网", "设置营业时间+特殊节假日", "添加10张以上高质量照片", "选择属性（女性经营/无障碍设施等）", "确保NAP一致性（跨平台）"]
+        },
+        "定期发布帖子吸引客户": {
+            title: "📢 发布帖子 信息流程",
+            steps: ["进入谷歌商家后台", "点击「发布帖子」", "上传图片/视频+撰写文案", "添加行动按钮（了解详情/预订）", "每周至少发布1-2次"]
+        },
+        "积极管理客户评论": {
+            title: "💬 评论管理 信息流程",
+            steps: ["定期查看新评论", "24小时内回复好评", "对差评诚恳道歉+提供解决方案", "邀请满意客户留评", "优质回复提升转化率"]
+        },
+        "利用数据分析优化运营": {
+            title: "📈 数据分析 信息流程",
+            steps: ["进入「数据」分析面板", "查看搜索词排行", "分析客户行为: 打电话/查路线/点击网站", "对比不同时段效果", "优化照片/帖子内容"]
+        },
+        "通过谷歌消息获取询盘": {
+            title: "💬 谷歌消息 信息流程",
+            steps: ["开启谷歌消息功能", "收到客户咨询通知", "及时回复（最好2小时内）", "提供报价/产品信息", "引导至官网/WhatsApp转化"]
+        }
+    };
+    
+    function renderGoogleFeatureFlowCard(featureName) {
+        const content = googleFeatureFlowContent[featureName];
+        if (!content) {
+            return `<div class="flow-card"><strong>📌 ${featureName} 信息流</strong><ul><li>入口定位 → 执行动作 → 获取客户价值</li></ul></div>`;
+        }
+        const pointsHtml = content.points.map(p => `<li>${p}</li>`).join('');
+        return `
+            <div class="flow-card">
+                <strong>${content.title}</strong>
+                <ul>${pointsHtml}</ul>
+                <div style="margin-top:6px; font-size:0.7rem; color:#6c86a0;">⚡ 信息流闭环：曝光 → 互动 → 信任 → 转化</div>
+            </div>
+        `;
+    }
+    
+    function renderGoogleStepFlowCard(stepKey, stepTitle) {
+        const content = googleStepFlowContent[stepKey];
+        if (!content) {
+            return `<div class="flow-card"><strong>📌 ${stepTitle} 操作流程</strong><ul><li>明确目标 → 执行动作 → 达成效果</li></ul></div>`;
+        }
+        const stepsHtml = content.steps.map(s => `<li>${s}</li>`).join('');
+        let specialNoteHtml = '';
+        if (content.specialNote) {
+            specialNoteHtml = `<div class="important-tip" style="margin-top: 10px; background: #fff3e0; border-left-color: #f5b042;">📌 ${content.specialNote}</div>`;
+        }
+        return `
+            <div class="flow-card">
+                <strong>${content.title}</strong>
+                <ul>${stepsHtml}</ul>
+                ${specialNoteHtml}
+                <div style="margin-top:6px; font-size:0.7rem; color:#4285F4;">✅ 跟着流程走，客户主动找上门</div>
+            </div>
+        `;
+    }
+    
+    // Google 完整数据
+    const googleData = {
+        name: "Google Business Profile (谷歌商家档案)",
+        about: "Google Business Profile 是谷歌推出的免费商家管理工具，让您的企业在谷歌搜索和谷歌地图上拥有官方展示页面。全球超过90%的消费者在购买前会搜索商家信息，完善的谷歌商家档案可以极大提升本地曝光、建立信任并带来精准询盘。",
+        zones: {
+            title: "🧩 谷歌商家档案 核心功能区 · 信息流图解",
+            features: [
+                { name: "🏠 商家档案首页", desc: "登录谷歌商家后台后看到的主界面，展示店铺基本信息、评分、近期动态。这是管理所有信息的入口。", flowKey: "商家档案首页" },
+                { name: "✏️ 信息编辑区", desc: "编辑公司名称、地址、电话(NAP)、营业时间、网站链接等核心信息。准确完整的信息是谷歌排名的基础。", flowKey: "信息编辑区" },
+                { name: "⭐ 评论管理区", desc: "查看并回复客户评价。积极管理评论能提升店铺评分，高评分店铺在搜索中排名更靠前。", flowKey: "评论管理区" },
+                { name: "📊 数据分析区", desc: "查看搜索曝光次数、客户行为数据（打电话、查路线、访问网站）。用数据优化运营策略。", flowKey: "数据分析区" },
+                { name: "📢 帖子发布区", desc: "发布产品更新、促销活动、公司新闻。帖子会显示在谷歌搜索结果中，免费增加品牌曝光。", flowKey: "帖子发布区" }
+            ]
+        },
+        guide: {
+            title: "🚀 谷歌商家档案 开发海外客户 · 信息流实战指南",
+            steps: [
+                { text: "第1步：创建/认领谷歌商家档案", detail: "访问 business.google.com，点击「添加到谷歌」。输入公司名称、选择业务类别。特别注意：地址填写你真实能收件的国内办公地址（拼音/英文），谷歌会寄送明信片验证。验证通过后，在后台隐藏你的地址，并设置服务区域为海外目标市场。", flowKey: "创建/认领谷歌商家档案" },
+                { text: "第2步：完善档案信息并优化", detail: "填写完整地址、电话、官网、营业时间。上传10张以上高质量产品/店铺照片。确保NAP信息与官网、社交媒体一致（提升SEO排名）。", flowKey: "完善档案信息并优化" },
+                { text: "第3步：定期发布帖子吸引客户", detail: "进入后台点击「发布帖子」，上传图片/视频，撰写产品介绍或促销文案，添加行动按钮（如「了解更多」「预订」）。每周至少发布1-2次。", flowKey: "定期发布帖子吸引客户" },
+                { text: "第4步：积极管理客户评论", detail: "每天查看新评论。对好评表示感谢；对差评诚恳回应并给出解决方案。邀请满意客户留下好评。回复率高的商家更容易获得客户信任。", flowKey: "积极管理客户评论" },
+                { text: "第5步：利用数据分析优化运营", detail: "进入「数据」面板，查看搜索词排名、客户行为（打电话/查路线/点击网站）。分析哪些照片/帖子效果最好，持续优化。", flowKey: "利用数据分析优化运营" },
+                { text: "第6步：通过谷歌消息获取询盘", detail: "开启谷歌消息功能，当客户点击「发消息」时，你会在后台收到通知。及时回复咨询，提供报价，引导至官网或WhatsApp完成订单。", flowKey: "通过谷歌消息获取询盘" }
+            ]
+        },
+        extra: {
+            metrics: "✅ 真实数据：完善谷歌商家档案的企业，本地搜索曝光量平均提升70%，询盘量增加120%！",
+            tips: "⚠️ 避坑指南：1）地址必须真实能收明信片；2）不要用虚拟地址；3）定期更新照片；4）差评不要删除要回复；5）NAP信息全网保持一致；6）验证完成后务必隐藏国内地址，设置海外服务区域。",
+            encouragement: "💪 信心寄语：谷歌商家档案是完全免费的海外获客利器！花一周时间完善档案，之后每月只需维护1-2小时，客户就会主动找上门。"
+        }
+    };
+    
+    // Facebook 功能区信息流内容映射（保持原样）
+    const featureFlowContent = {
+        "动态消息": { 
+            title: "📰 动态消息 (News Feed) 信息流",
+            points: ["登录后默认主界面", "展示好友/专页/群组最新动态", "通过点赞/评论与潜在客户互动", "算法推荐行业相关内容"]
+        },
+        "群组": { 
+            title: "👥 群组 (Groups) 信息流",
+            points: ["搜索行业关键词加入群组", "观察群规 + 日常互动答疑", "分享专业知识建立影响力", "适度分享产品/服务引流"]
+        },
+        "公共主页": { 
+            title: "🏢 公共主页 (Page) 信息流",
+            points: ["创建商业主页并完善资料", "上传Logo+封面 + 联系方式", "定期发布产品/行业内容", "粉丝沉淀 → 私信询盘"]
+        },
+        "Messenger 私信": { 
+            title: "💬 Messenger 信息流",
+            points: ["接收好友/陌生人消息", "及时回复并提供价值", "发送产品资料/报价", "建立信任 → 转化为订单"]
+        },
+        "广告管理工具": { 
+            title: "📊 广告管理工具 信息流",
+            points: ["创建广告账户", "设置目标受众(国家/兴趣)", "设计广告素材", "投放广告 → 获取询盘表单"]
+        }
+    };
+    
+    const stepFlowContent = {
+        "创建/优化商业公共主页": {
+            title: "📌 创建/优化公共主页 信息流程",
+            steps: ["登录FB → 左侧菜单「公共主页」", "点击「新建公共主页」", "填写名称/类别/简介", "上传头像+封面图", "完善联系方式 ✅"]
+        },
+        "精准搜索目标客户并加好友": {
+            title: "🎯 搜索客户加好友 信息流程",
+            steps: ["顶部搜索框输入「职位+行业」", "筛选「用户」结果", "访问目标客户主页", "点击「加好友」（每日≤20人）", "避免频繁操作防封号"]
+        },
+        "加入行业群组并活跃互动": {
+            title: "👥 行业群组互动 信息流程",
+            steps: ["搜索「产品词+group」", "申请加入群组", "阅读群规 + 观察氛围", "每日互动/解答问题", "建立影响力 → 引流主页"]
+        },
+        "使用Audience Insights分析受众": {
+            title: "📊 Audience Insights 信息流程",
+            steps: ["进入广告管理工具", "选择「受众分析」", "筛选国家/年龄/兴趣", "获取人群画像数据", "优化内容与广告策略"]
+        },
+        "发布有价值的内容吸引客户": {
+            title: "✍️ 发布内容 信息流程",
+            steps: ["点击发帖编辑器", "选择图片/视频", "撰写文案 + 话题标签", "定时发布内容", "查看互动数据并优化"]
+        },
+        "通过Messenger跟进转化客户": {
+            title: "💬 Messenger跟进 信息流程",
+            steps: ["收到私信提醒", "快速响应 + 提供价值", "发送产品目录/样品信息", "引导至邮件/WhatsApp", "跟进完成订单转化"]
+        }
+    };
+    
+    function renderFeatureFlowCard(featureName) {
+        const content = featureFlowContent[featureName];
+        if (!content) {
+            return `<div class="flow-card"><strong>📌 ${featureName} 信息流</strong><ul><li>入口定位 → 执行动作 → 获取客户价值</li></ul></div>`;
+        }
+        const pointsHtml = content.points.map(p => `<li>${p}</li>`).join('');
+        return `
+            <div class="flow-card">
+                <strong>${content.title}</strong>
+                <ul>${pointsHtml}</ul>
+                <div style="margin-top:6px; font-size:0.7rem; color:#6c86a0;">⚡ 信息流闭环：曝光 → 互动 → 信任 → 询盘</div>
+            </div>
+        `;
+    }
+    
+    function renderStepFlowCard(stepKey, stepTitle) {
+        const content = stepFlowContent[stepKey];
+        if (!content) {
+            return `<div class="flow-card"><strong>📌 ${stepTitle} 操作流程</strong><ul><li>明确目标 → 执行动作 → 达成效果</li></ul></div>`;
+        }
+        const stepsHtml = content.steps.map(s => `<li>${s}</li>`).join('');
+        return `
+            <div class="flow-card">
+                <strong>${content.title}</strong>
+                <ul>${stepsHtml}</ul>
+                <div style="margin-top:6px; font-size:0.7rem; color:#1877f2;">✅ 跟着流程走，客户自然来</div>
+            </div>
+        `;
+    }
+    
+    const facebookData = {
+        name: "Facebook",
+        about: "Facebook由马克·扎克伯格于2004年创立，是全球最大的社交网络平台，月活跃用户超过29亿。对于外贸人来说，Facebook是开发海外客户、建立品牌影响力和社群营销的核心阵地。",
+        zones: {
+            title: "🧩 Facebook 核心功能区 · 信息流图解",
+            features: [
+                { name: "📰 动态消息 (News Feed)", desc: "登录后的主界面，展示好友、专页、群组的最新动态。通过刷信息流可以发现潜在客户的日常活动，并及时互动建立联系。", flowKey: "动态消息" },
+                { name: "👥 群组 (Groups)", desc: "行业社群聚集地。加入相关群组后，积极互动分享专业知识，这是开发精准客户最高效的渠道之一。", flowKey: "群组" },
+                { name: "🏢 公共主页 (Page)", desc: "企业的官方展示窗口。创建商业主页并完善信息，让客户第一时间了解你的品牌和产品。", flowKey: "公共主页" },
+                { name: "💬 Messenger 私信", desc: "即时通讯工具。与潜在客户建立初步联系后，通过私信深入沟通，发送报价和资料，加速转化。", flowKey: "Messenger 私信" },
+                { name: "📊 广告管理工具 (Ads Manager)", desc: "精准广告投放后台。通过定位国家、行业、兴趣，将广告展示给目标客户，快速获取询盘。", flowKey: "广告管理工具" }
+            ]
+        },
+        guide: {
+            title: "🚀 Facebook开发海外客户 · 信息流实战指南",
+            steps: [
+                { text: "第1步：创建/优化商业公共主页", detail: "登录Facebook后，在左侧菜单找到「公共主页」，点击「新建公共主页」。填写公司名称、选择类别（例如：Manufacturing、E-commerce）、完善简介和联系方式。上传专业Logo和封面图，让客户信任你。", flowKey: "创建/优化商业公共主页" },
+                { text: "第2步：精准搜索目标客户并加好友", detail: "在顶部搜索框输入「职位关键词+行业」，如「Purchasing Manager furniture」。点击「用户」筛选结果，访问目标客户主页后点击「加好友」。注意每天添加好友不超过20人，避免被系统限制。", flowKey: "精准搜索目标客户并加好友" },
+                { text: "第3步：加入行业群组并活跃互动", detail: "搜索「产品关键词+group」，例如「home decor buyers group」。申请加入群组后，先阅读群规，然后积极参与讨论、回答问题，树立专家形象，再适度分享产品信息。", flowKey: "加入行业群组并活跃互动" },
+                { text: "第4步：使用Audience Insights分析受众", detail: "进入Facebook广告管理工具，找到「受众分析」功能。设置目标国家、年龄、兴趣等条件，分析哪些人最可能购买你的产品，从而优化内容和广告策略。", flowKey: "使用Audience Insights分析受众" },
+                { text: "第5步：发布有价值的内容吸引客户", detail: "定期发布产品图片、视频、客户案例、行业知识。使用话题标签增加曝光。内容要有价值，分享生产过程、使用教程、客户好评等，建立可信赖的品牌形象。", flowKey: "发布有价值的内容吸引客户" },
+                { text: "第6步：通过Messenger跟进转化客户", detail: "当用户对你的帖子点赞、评论或主动私信时，第一时间通过Messenger回复。提供帮助如「需要产品目录吗？」逐步引导到邮件或WhatsApp，最终完成订单。", flowKey: "通过Messenger跟进转化客户" }
+            ]
+        },
+        extra: {
+            metrics: "✅ 真实数据：持续按信息流步骤操作的外贸人，3个月内询盘量平均提升85%！",
+            tips: "⚠️ 避坑指南：新账号先养号2周；加好友每天≤20人；IP地址保持稳定；别在群组直接发广告链接；务必创建商业主页，保护资产安全。",
+            encouragement: "💪 信心寄语：信息流就是你的行动地图！每天跟着流程图操作1小时，一个月后你会发现询盘根本回不完。"
+        }
+    };
+    
+    // 通用渲染函数
+    function renderZonesWithFlow(data, isGoogle = false) {
+        if (!data.zones || !data.zones.features) return '';
+        const renderFlowCard = isGoogle ? renderGoogleFeatureFlowCard : renderFeatureFlowCard;
+        const featuresHtml = data.zones.features.map(f => {
+            const flowCardHtml = renderFlowCard(f.flowKey);
+            return `
+                <div class="feature-item">
+                    <div class="feature-desc">
+                        <strong>${f.name}</strong>
+                        <p>${f.desc}</p>
+                        <div class="infoflow-tag">⚡ 信息流指引</div>
+                    </div>
+                    <div class="feature-screenshot">
+                        ${flowCardHtml}
+                        <div class="screenshot-caption">📋 信息流程图：${f.flowKey} 快速理解</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        return `
+            <div class="insight-card fade-in">
+                <div class="card-header">
+                    <span class="badge-icon">🧩</span>
+                    <h2>${data.zones.title}</h2>
+                </div>
+                <div class="card-body">
+                    <div class="feature-grid">
+                        ${featuresHtml}
+                    </div>
+                    <div class="insight-note">
+                        💡 每个功能区都配有「信息流示意图」，一眼看懂入口、动作和价值。
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    function renderGuideWithFlow(data, isGoogle = false) {
+        if (!data.guide || !data.guide.steps) return '';
+        const renderStepCard = isGoogle ? renderGoogleStepFlowCard : renderStepFlowCard;
+        const stepsHtml = data.guide.steps.map((step, idx) => {
+            const flowCardHtml = renderStepCard(step.flowKey, step.text);
+            return `
+                <div class="step-item">
+                    <div class="step-title">
+                        <span class="step-number">${idx+1}</span>
+                        <span>${step.text}</span>
+                    </div>
+                    <div class="guide-media-row">
+                        <div class="guide-text">
+                            <p>${step.detail}</p>
+                            <div class="infoflow-tag" style="margin-top:6px;">📌 信息流操作链路</div>
+                        </div>
+                        <div class="guide-img">
+                            ${flowCardHtml}
+                            <div class="screenshot-caption" style="margin-top:8px;">🔄 信息流程图：${step.flowKey}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        return `
+            <div class="insight-card fade-in">
+                <div class="card-header">
+                    <span class="badge-icon">🎯</span>
+                    <h2>${data.guide.title}</h2>
+                </div>
+                <div class="card-body">
+                    ${stepsHtml}
+                    <div class="insight-note" style="margin-top:1rem;">
+                        📌 每个步骤右侧都有「信息流示意图」，跟着流程图一步步操作，轻松开发海外客户！
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    function renderExtraModule(data, isGoogle = false) {
+        if (!data.extra) return '';
+        return `
+            <div class="insight-card fade-in">
+                <div class="card-header">
+                    <span class="badge-icon">📈</span>
+                    <h2>📊 真实成果参考 & 新手避坑宝典</h2>
+                </div>
+                <div class="card-body">
+                    <div class="metrics-card">
+                        <div style="font-weight:700; margin-bottom:0.5rem;">🏆 外贸人最关心的获客数据</div>
+                        <p>${data.extra.metrics}</p>
+                    </div>
+                    <div style="background:#fff5e8; border-radius:1rem; padding:1rem; margin-top:1rem;">
+                        <div style="font-weight:700; margin-bottom:0.5rem; color:#b45f1b;">⚠️ 实战避坑指南（少走弯路）</div>
+                        <p>${data.extra.tips}</p>
+                    </div>
+                    <div style="background:#e8f4fd; border-radius:1rem; padding:1rem; margin-top:1rem;">
+                        <div style="font-weight:700; margin-bottom:0.5rem; color:#1877f2;">💪 信心寄语</div>
+                        <p>${data.extra.encouragement}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    function renderContent(socialKey) {
+        let data, isGoogle = false;
+        if (socialKey === 'facebook') {
+            data = facebookData;
+            isGoogle = false;
+        } else if (socialKey === 'google') {
+            data = googleData;
+            isGoogle = true;
+        } else {
+            const comingHtml = `
+                <div class="insight-card fade-in" style="text-align:center; padding:3rem;">
+                    <span style="font-size:4rem;">🚧</span>
+                    <h2 style="margin-top:1rem;">更多平台教程即将上线</h2>
+                    <p style="margin-top:1rem; color:#6c86a0;">目前已完成 Facebook 和 Google Business Profile 完整信息流实战教程，其他平台敬请期待！</p>
+                </div>
+            `;
+            document.getElementById('dynamicContent').innerHTML = comingHtml;
+            document.getElementById('dynamicContent').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            return;
+        }
+        
+        const aboutHtml = `
+            <div class="insight-card fade-in">
+                <div class="card-header">
+                    <span class="badge-icon">📜</span>
+                    <h2>起源 · ${data.name}</h2>
+                </div>
+                <div class="card-body">
+                    <p style="font-size:1rem; line-height:1.6;">${data.about}</p>
+                    <div style="margin-top:0.8rem;">
+                        <span class="${isGoogle ? 'google-badge' : 'fb-badge'}">${isGoogle ? '全球80%+消费者使用' : '月活29亿+'}</span>
+                        <span class="${isGoogle ? 'google-badge' : 'fb-badge'}" style="background:${isGoogle ? '#34A853' : '#42b72a'};">${isGoogle ? '免费本地营销利器' : '全球第一社交平台'}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+        const zonesHtml = renderZonesWithFlow(data, isGoogle);
+        const guideHtml = renderGuideWithFlow(data, isGoogle);
+        const extraHtml = renderExtraModule(data, isGoogle);
+        const fullHtml = aboutHtml + zonesHtml + guideHtml + extraHtml;
+        document.getElementById('dynamicContent').innerHTML = fullHtml;
+        document.getElementById('dynamicContent').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    
+    const revealBtn = document.getElementById('revealBtn');
+    const selectEl = document.getElementById('socialSelect');
+    revealBtn.addEventListener('click', () => renderContent(selectEl.value));
+    window.addEventListener('DOMContentLoaded', () => renderContent('facebook'));
+</script>
+</body>
+</html>
