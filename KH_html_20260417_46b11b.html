@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>外贸客户时刻表 | 全球商机管家</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f7fc;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #1a2634;
+            line-height: 1.4;
+            padding: 2rem 1.5rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #1e2b3c 0%, #2c4c6e 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+            margin-bottom: 0.3rem;
+        }
+
+        .header p {
+            color: #5b6f82;
+            font-size: 0.95rem;
+            border-left: 3px solid #cfdee9;
+            padding-left: 0.8rem;
+        }
+
+        .search-card {
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(2px);
+            border-radius: 28px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+            padding: 1.2rem 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255,255,255,0.6);
+        }
+
+        .search-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: flex-end;
+        }
+
+        .input-group {
+            flex: 2;
+            min-width: 220px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            color: #5b6f82;
+            margin-bottom: 0.4rem;
+        }
+
+        .input-group select {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            font-size: 0.95rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            background: #ffffff;
+            transition: 0.2s;
+            font-family: inherit;
+            color: #1e2b3c;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .input-group select:focus {
+            border-color: #8aaec0;
+            box-shadow: 0 0 0 3px rgba(80, 120, 150, 0.15);
+        }
+
+        .query-btn {
+            background: #1e3a4d;
+            color: white;
+            border: none;
+            padding: 0.85rem 2rem;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .query-btn:hover {
+            background: #0f2c3b;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-card, .order-card {
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
+            border: 1px solid #edf2f7;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 1.2rem 1.8rem 0.4rem 1.8rem;
+            border-bottom: 1px solid #f0f2f5;
+        }
+
+        .card-header h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1e2b3c;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-content {
+            padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .detail-item {
+            background: #fafcff;
+            border-radius: 20px;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ecf3f9;
+        }
+
+        .detail-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #6d8aac;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.3rem;
+        }
+
+        .detail-value {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #1e2b3c;
+            line-height: 1.4;
+        }
+
+        .time-highlight {
+            background: linear-gradient(135deg, #eef3fc, #ffffff);
+            border-left: 4px solid #2c6280;
+        }
+        .time-value {
+            font-family: monospace;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .orders-tag-container {
+            max-height: 320px;
+            overflow-y: auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 1.2rem;
+        }
+
+        .order-tag {
+            background: #f1f5f9;
+            border-radius: 48px;
+            padding: 0.5rem 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid #e2edf5;
+        }
+
+        .order-tag:hover {
+            background: #e6edf4;
+            transform: translateY(-1px);
+        }
+
+        .tag-title {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #1e4a6b;
+            max-width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .delete-tag {
+            background: none;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            color: #9bb7cf;
+            padding: 0 4px;
+            border-radius: 30px;
+        }
+
+        .delete-tag:hover {
+            color: #cf5c5c;
+            background: rgba(207,92,92,0.1);
+        }
+
+        .empty-tags {
+            text-align: center;
+            padding: 2rem;
+            color: #95adc2;
+            width: 100%;
+        }
+
+        .add-order-area {
+            border-top: 1px solid #eff3f8;
+            padding-top: 1rem;
+            text-align: center;
+        }
+
+        .add-detail-btn {
+            background: #eef3fa;
+            border: none;
+            padding: 0.6rem 1.4rem;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: #1e4a6b;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .add-detail-btn:hover {
+            background: #e0eaf3;
+        }
+
+        .country-name-highlight {
+            background: linear-gradient(120deg, #eef5fa, #ffffff);
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-left: 0.5rem;
+            color: #2c6280;
+        }
+
+        .error-tip {
+            color: #c96f6f;
+            background: #fff6f0;
+            border-radius: 28px;
+            padding: 0.8rem;
+            text-align: center;
+        }
+
+        footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #99aec2;
+            border-top: 1px solid #e2eaf1;
+            padding-top: 1.2rem;
+        }
+
+        @media (max-width: 860px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            body {
+                padding: 1rem;
+            }
+        }
+
+        .modal-overlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); backdrop-filter:blur(4px); align-items:center; justify-content:center; z-index:1000; }
+        .modal-overlay.active { display: flex; }
+        .modal-container { background: white; border-radius: 36px; width: 90%; max-width: 520px; overflow: hidden; }
+        .modal-header, .modal-body, .modal-footer { padding: 1rem 1.5rem; }
+        .form-field { margin-bottom: 1rem; }
+        .form-field label { display: block; font-size: 0.7rem; font-weight: 600; color: #5f7d9c; margin-bottom: 0.3rem; }
+        .form-field input, .form-field textarea { width: 100%; padding: 0.7rem; border: 1px solid #e2e8f0; border-radius: 20px; font-family: inherit; }
+        .modal-btn { padding: 0.5rem 1.2rem; border-radius: 40px; border: none; font-weight: 500; cursor: pointer; }
+        .modal-btn-primary { background: #1e3a4d; color: white; }
+        .modal-btn-secondary { background: #eef2f6; color: #2c4f6e; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🌍 外贸客户时刻表</h1>
+        <p>实时时钟 · 文化洞察 · 订单精细管理 | 全球商机助手</p>
+    </div>
+
+    <div class="search-card">
+        <div class="search-wrapper">
+            <div class="input-group">
+                <label>📋 快速选择国家</label>
+                <select id="countrySelect">
+                    <option value="">—— 请选择国家 ——</option>
+                </select>
+            </div>
+            <button class="query-btn" id="searchBtn">✨ 查询时刻与文化</button>
+        </div>
+    </div>
+
+    <div class="dashboard">
+        <div class="info-card">
+            <div class="card-header">
+                <h2>📖 国家文化档案 <span id="currentCountryBadge" class="country-name-highlight">未选择</span></h2>
+            </div>
+            <div class="card-content" id="countryInfoPanel">
+                <div style="text-align:center; padding: 2rem 0; color:#99b2c4;">
+                    🔍 请选择国家并点击查询
+                </div>
+            </div>
+        </div>
+
+        <div class="order-card">
+            <div class="card-header">
+                <h2>📌 订单明细簿 <span style="font-size:0.7rem; font-weight:normal;">点击标签查看详情</span></h2>
+            </div>
+            <div class="card-content">
+                <div id="ordersTagsContainer" class="orders-tag-container">
+                    <div class="empty-tags">✨ 暂无订单明细，点击下方按钮添加</div>
+                </div>
+                <div class="add-order-area">
+                    <button class="add-detail-btn" id="openOrderModalBtn">➕ 添加订单 / 客户小记</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>⚡ 实时时钟自动刷新 · 订单数据本地保存 · 文化数据实时查询</footer>
+</div>
+
+<div id="dynamicModal" class="modal-overlay">
+    <div class="modal-container">
+        <div class="modal-header">
+            <h3 id="modalTitle">新增订单明细</h3>
+            <button class="close-modal" id="closeModalBtn">&times;</button>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+        <div class="modal-footer" id="modalFooter"></div>
+    </div>
+</div>
+
+<script>
+    // ---------- 国家数据库 ----------
+    const countriesLibrary = {
+        "美国": { timezoneId: "America/New_York", timezoneDesc: "EST/EDT (UTC-5/UTC-4) · 最佳联系: 09:00-17:00", customs: "直接高效，注重契约，握手礼", taboos: "避免谈论薪资/政治", likes: "创新科技，定制化", dislikes: "迟到，模糊报价" },
+        "英国": { timezoneId: "Europe/London", timezoneDesc: "GMT/BST (UTC+0/UTC+1) · 10:00-16:00", customs: "注重礼仪，绅士风度", taboos: "忌问收入，忌用英格兰指代全英", likes: "经典品质，合规细节", dislikes: "过度强势" },
+        "德国": { timezoneId: "Europe/Berlin", timezoneDesc: "CET/CEST (UTC+1/UTC+2) · 08:30-17:00", customs: "严谨守时，重视数据", taboos: "忌迟到，避免玩笑轻浮", likes: "技术精密，环保认证", dislikes: "模糊承诺" },
+        "法国": { timezoneId: "Europe/Paris", timezoneDesc: "CET/CEST · 09:30-12:00,14:30-18:00", customs: "艺术感，用法语问候", taboos: "忌过度谈钱", likes: "奢侈品，设计感", dislikes: "粗鲁催促" },
+        "日本": { timezoneId: "Asia/Tokyo", timezoneDesc: "JST (UTC+9) · 10:00-16:00", customs: "交换名片双手，鞠躬礼", taboos: "忌数字4/9，忌红笔写名", likes: "品质至上，严谨工期", dislikes: "直呼其名" },
+        "韩国": { timezoneId: "Asia/Seoul", timezoneDesc: "KST (UTC+9) · 09:30-18:00", customs: "尊卑分明，用敬语", taboos: "红色签名，用手指指人", likes: "K-culture，快速响应", dislikes: "无礼迟到" },
+        "印度": { timezoneId: "Asia/Kolkata", timezoneDesc: "IST (UTC+5:30) · 11:00-17:00", customs: "双手合十，重视关系", taboos: "忌左手递物", likes: "价格弹性，大量采购", dislikes: "急躁催促" },
+        "巴西": { timezoneId: "America/Sao_Paulo", timezoneDesc: "BRT (UTC-3) · 10:00-17:00", customs: "热情肢体接触", taboos: "忌OK手势", likes: "人情味，灵活付款", dislikes: "官僚主义" },
+        "澳大利亚": { timezoneId: "Australia/Sydney", timezoneDesc: "AEST/AEDT · 09:30-16:30", customs: "直率平等，幽默随和", taboos: "忌贬低运动队", likes: "户外环保，创新", dislikes: "傲慢" },
+        "加拿大": { timezoneId: "America/Toronto", timezoneDesc: "多时区 · 10:00-16:00 EST", customs: "礼貌谦逊，多元文化", taboos: "忌对比美国", likes: "可持续发展", dislikes: "噪音推销" },
+        "意大利": { timezoneId: "Europe/Rome", timezoneDesc: "CET/CEST · 10:00-13:00,15:30-18:00", customs: "热情健谈，设计感", taboos: "忌过于直接批评", likes: "奢侈品，美食", dislikes: "不注重形象" },
+        "西班牙": { timezoneId: "Europe/Madrid", timezoneDesc: "CET/CEST · 10:00-14:00,16:30-19:00", customs: "午休较长，重视关系", taboos: "忌政治敏感", likes: "旅游产业", dislikes: "高压销售" },
+        "墨西哥": { timezoneId: "America/Mexico_City", timezoneDesc: "UTC-6/UTC-5 · 10:00-18:00", customs: "亲切拥抱，家族观念", taboos: "忌对亡灵节不敬", likes: "热情服务", dislikes: "生硬冷淡" },
+        "荷兰": { timezoneId: "Europe/Amsterdam", timezoneDesc: "CET/CEST · 09:00-17:00", customs: "直接务实，平等主义", taboos: "忌炫耀财富", likes: "可持续贸易", dislikes: "拖泥带水" },
+        "土耳其": { timezoneId: "Europe/Istanbul", timezoneDesc: "TRT UTC+3 · 09:30-18:00", customs: "茶饮社交，讨价还价", taboos: "忌左手递物", likes: "手工艺品", dislikes: "急躁" },
+        "阿联酋": { timezoneId: "Asia/Dubai", timezoneDesc: "GST UTC+4 · 10:00-17:00(周五休息)", customs: "尊重伊斯兰习俗", taboos: "忌饮酒公共场合", likes: "奢华品质", dislikes: "不尊重信仰" },
+        "俄罗斯": { timezoneId: "Europe/Moscow", timezoneDesc: "MSK UTC+3 · 10:00-17:00", customs: "重视头衔，伏特加礼仪", taboos: "忌送黄花", likes: "重工业", dislikes: "轻浮" },
+        "南非": { timezoneId: "Africa/Johannesburg", timezoneDesc: "SAST UTC+2 · 09:00-16:00", customs: "握手有力，包容", taboos: "忌种族敏感", likes: "资源矿产", dislikes: "不守信用" },
+        "印度尼西亚": { timezoneId: "Asia/Jakarta", timezoneDesc: "UTC+7至+9 · 09:30-16:00", customs: "温和微笑，避免冲突", taboos: "忌用左手", likes: "和谐产品", dislikes: "粗鲁" },
+        "沙特阿拉伯": { timezoneId: "Asia/Riyadh", timezoneDesc: "AST UTC+3 · 10:00-16:00", customs: "伊斯兰文化严格", taboos: "禁酒及猪肉", likes: "基建项目", dislikes: "轻率着装" },
+        "瑞典": { timezoneId: "Europe/Stockholm", timezoneDesc: "CET/CEST · 09:00-16:30", customs: "平等谦逊，环保", taboos: "忌炫耀财富", likes: "创新设计", dislikes: "浮夸" }
+    };
+    const countryList = Object.keys(countriesLibrary);
+
+    // ---------- 订单存储 ----------
+    let ordersDB = {};
+    function loadOrders() {
+        const stored = localStorage.getItem("TradeClientOrders_NoCalendar");
+        if (stored) {
+            ordersDB = JSON.parse(stored);
+            for(let c in ordersDB) if(Array.isArray(ordersDB[c])) {
+                ordersDB[c] = ordersDB[c].map(o => ({ ...o, customerName: o.customerName || "未记录客户" }));
+            }
+        } else {
+            ordersDB = {
+                "美国": [{ id: "us1", customerName: "GreenTech LLC", title: "环保材料样品", details: "测试可降解包装，样品已发", createdAt: new Date().toLocaleString() }],
+                "德国": [{ id: "de1", customerName: "AutoPrecision GmbH", title: "TÜV认证需求", details: "需提供TÜV证书", createdAt: new Date().toLocaleString() }]
+            };
+            saveOrders();
+        }
+    }
+    function saveOrders() { localStorage.setItem("TradeClientOrders_NoCalendar", JSON.stringify(ordersDB)); }
+    function getOrders(country) { return ordersDB[country] || []; }
+    function addOrder(country, cust, title, detail) {
+        if(!country || !cust || !title || !detail) return false;
+        const orders = getOrders(country);
+        orders.push({ id: Date.now()+"_"+Math.random(), customerName: cust, title, details: detail, createdAt: new Date().toLocaleString() });
+        ordersDB[country] = orders;
+        saveOrders();
+        return true;
+    }
+    function deleteOrder(country, id) {
+        if(!ordersDB[country]) return;
+        ordersDB[country] = ordersDB[country].filter(o => o.id != id);
+        saveOrders();
+    }
+
+    // ---------- 实时时钟 ----------
+    let clockInterval = null;
+    function updateClock(tzId) {
+        const bjSpan = document.getElementById("beijingTimeSpan");
+        const foreignSpan = document.getElementById("foreignTimeSpan");
+        if(bjSpan && foreignSpan && tzId) {
+            bjSpan.innerText = new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', hour12: false });
+            foreignSpan.innerText = new Date().toLocaleString('zh-CN', { timeZone: tzId, hour12: false });
+        }
+    }
+    function startClock(tzId) {
+        if(clockInterval) clearInterval(clockInterval);
+        if(!tzId) return;
+        updateClock(tzId);
+        clockInterval = setInterval(() => updateClock(tzId), 1000);
+    }
+    function stopClock() { if(clockInterval) clearInterval(clockInterval); }
+
+    // 渲染文化信息
+    function renderCulture(country) {
+        const data = countriesLibrary[country];
+        if(!data) {
+            document.getElementById("countryInfoPanel").innerHTML = `<div class="error-tip">未找到“${country}”的文化数据</div>`;
+            return false;
+        }
+        const html = `
+            <div class="detail-grid">
+                <div class="detail-item time-highlight" style="grid-column:span 2;">
+                    <div class="detail-label">🕘 实时时钟 · 跨境时刻</div>
+                    <div class="detail-value">
+                        <div>🇨🇳 北京时间：<span id="beijingTimeSpan" class="time-value">--:--:--</span></div>
+                        <div style="margin-top:6px;">🌍 ${country} 当地：<span id="foreignTimeSpan" class="time-value">--:--:--</span></div>
+                        <div style="font-size:0.7rem; margin-top:4px;">⏱️ ${data.timezoneDesc}</div>
+                    </div>
+                </div>
+                <div class="detail-item"><div class="detail-label">🎎 风俗习惯</div><div class="detail-value">${data.customs}</div></div>
+                <div class="detail-item"><div class="detail-label">🚫 禁忌</div><div class="detail-value">${data.taboos}</div></div>
+                <div class="detail-item"><div class="detail-label">❤️ 喜好</div><div class="detail-value">${data.likes}</div></div>
+                <div class="detail-item"><div class="detail-label">👎 厌恶</div><div class="detail-value">${data.dislikes}</div></div>
+            </div>
+        `;
+        document.getElementById("countryInfoPanel").innerHTML = html;
+        startClock(data.timezoneId);
+        return true;
+    }
+
+    // 订单标签渲染
+    function renderOrders(country) {
+        const container = document.getElementById("ordersTagsContainer");
+        const orders = getOrders(country);
+        if(!orders.length) {
+            container.innerHTML = `<div class="empty-tags">📭 暂无订单，点击添加</div>`;
+            return;
+        }
+        container.innerHTML = orders.map(o => `
+            <div class="order-tag" data-id="${o.id}">
+                <span class="tag-title">📄 ${escapeHtml(o.customerName)} · ${escapeHtml(o.title.length>20?o.title.slice(0,20)+'…':o.title)}</span>
+                <button class="delete-tag" data-id="${o.id}">✕</button>
+            </div>
+        `).join('');
+        // 查看详情
+        document.querySelectorAll('.order-tag').forEach(tag => {
+            tag.addEventListener('click', (e) => {
+                if(e.target.classList.contains('delete-tag')) return;
+                const id = tag.getAttribute('data-id');
+                const order = orders.find(o => o.id == id);
+                if(order) showOrderDetail(order);
+            });
+        });
+        // 删除
+        document.querySelectorAll('.delete-tag').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = btn.getAttribute('data-id');
+                deleteOrder(country, id);
+                renderOrders(country);
+            });
+        });
+    }
+    function escapeHtml(s) { return String(s).replace(/[&<>]/g, m => m==='&'?'&amp;':(m==='<'?'&lt;':'&gt;')); }
+
+    // 模态框
+    const modal = document.getElementById("dynamicModal");
+    function closeModal() { modal.style.display = "none"; }
+    function showAddModal() {
+        if(!currentActiveCountry) { alert("请先选择国家"); return; }
+        modal.style.display = "flex";
+        document.getElementById("modalTitle").innerText = `➕ 新增订单 · ${currentActiveCountry}`;
+        document.getElementById("modalBody").innerHTML = `
+            <div class="form-field"><label>👥 客户名称 *</label><input id="custName" placeholder="公司/联系人"></div>
+            <div class="form-field"><label>📌 标题 *</label><input id="orderTitle" placeholder="简短描述"></div>
+            <div class="form-field"><label>📋 详细内容</label><textarea id="orderDetails" rows="4" placeholder="跟进记录、需求等"></textarea></div>
+        `;
+        document.getElementById("modalFooter").innerHTML = `<button class="modal-btn modal-btn-secondary" id="cancelModal">取消</button><button class="modal-btn modal-btn-primary" id="confirmAdd">保存</button>`;
+        document.getElementById("cancelModal").onclick = closeModal;
+        document.getElementById("confirmAdd").onclick = () => {
+            const cust = document.getElementById("custName").value.trim();
+            const title = document.getElementById("orderTitle").value.trim();
+            const det = document.getElementById("orderDetails").value.trim();
+            if(!cust || !title) { alert("请填写客户名称和标题"); return; }
+            if(addOrder(currentActiveCountry, cust, title, det)) {
+                renderOrders(currentActiveCountry);
+                closeModal();
+            } else alert("保存失败");
+        };
+        document.getElementById("closeModalBtn").onclick = closeModal;
+    }
+    function showOrderDetail(order) {
+        modal.style.display = "flex";
+        document.getElementById("modalTitle").innerText = "📋 订单详情";
+        document.getElementById("modalBody").innerHTML = `
+            <div><strong>客户：</strong> ${escapeHtml(order.customerName)}</div>
+            <div><strong>标题：</strong> ${escapeHtml(order.title)}</div>
+            <div><strong>详情：</strong><div style="background:#f8fafc; padding:0.6rem; border-radius:20px; margin-top:6px;">${escapeHtml(order.details).replace(/\n/g,'<br>')}</div></div>
+            <div style="margin-top:8px; font-size:0.7rem;">创建: ${order.createdAt}</div>
+        `;
+        document.getElementById("modalFooter").innerHTML = `<button class="modal-btn modal-btn-secondary" id="closeDetail">关闭</button>`;
+        document.getElementById("closeDetail").onclick = closeModal;
+        document.getElementById("closeModalBtn").onclick = closeModal;
+    }
+
+    let currentActiveCountry = "美国";
+
+    function setCountry(country) {
+        if(!countriesLibrary[country]) {
+            console.error("无效国家", country);
+            return false;
+        }
+        currentActiveCountry = country;
+        document.getElementById("currentCountryBadge").innerText = country;
+        renderCulture(country);
+        renderOrders(country);
+        return true;
+    }
+
+    function queryCountry() {
+        const selectEl = document.getElementById("countrySelect");
+        const val = selectEl.value;
+        if(!val) {
+            alert("请选择一个国家");
+            return;
+        }
+        setCountry(val);
+    }
+
+    function initSelect() {
+        const sel = document.getElementById("countrySelect");
+        sel.innerHTML = '<option value="">—— 请选择国家 ——</option>';
+        countryList.sort().forEach(c => {
+            const option = document.createElement("option");
+            option.value = c;
+            option.textContent = c;
+            sel.appendChild(option);
+        });
+    }
+
+    function init() {
+        loadOrders();
+        initSelect();
+        const searchBtn = document.getElementById("searchBtn");
+        if(searchBtn) searchBtn.addEventListener("click", queryCountry);
+        const addBtn = document.getElementById("openOrderModalBtn");
+        if(addBtn) addBtn.addEventListener("click", showAddModal);
+        setCountry("美国");
+        const selectEl = document.getElementById("countrySelect");
+        if(selectEl) selectEl.value = "美国";
+    }
+    init();
+</script>
+</body>
+</html>
